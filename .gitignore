@@ -7,7 +7,8 @@
 /views/v1/style/js/**/*.min.js
 /views/v1/style/js/**/*.css
 
-#忽略根目录下的配置文件
+#忽略配置文件
+/config/databse.php
 .env*
 
 .DS_Store
