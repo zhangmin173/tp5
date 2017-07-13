@@ -9,6 +9,7 @@ class Index extends Controller
 	
 	public function index()
 	{
+		dump(config());
 		return 'Hello world';
 	}
 }

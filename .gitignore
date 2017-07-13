@@ -9,7 +9,6 @@
 
 #忽略根目录下的配置文件
 .env*
-!.env.example.php
 
 .DS_Store
 .idea
