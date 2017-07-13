@@ -1,5 +1,4 @@
 <?php
-use think\Env;
 
 return [
 	// 默认Host地址

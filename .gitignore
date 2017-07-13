@@ -8,7 +8,7 @@
 /views/v1/style/js/**/*.css
 
 #忽略配置文件
-.env*
+#.env*
 
 .DS_Store
 .idea
