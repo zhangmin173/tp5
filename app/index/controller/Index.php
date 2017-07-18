@@ -8,15 +8,15 @@ class Index extends Base
 	
 	public function index()
 	{
-		throw new \think\exception\HttpException(404, '异常消息', null, []);
+		//dump(request());
 		$this->data['msg'] = 'hello';
-		//dump($this->data);
+		dump($this->data);
 		
-		return $this->fetch('',$this->data);
+		return $this->fetch($this->_tpl.'index/index',$this->data);
 	}
 
 	public function test()
 	{
-		$this->success('哈哈',$this->_global['url']['jump_url']);
+		$this->success('成功',$this->_global['url']['jump_url'],['data'=>'123']);
 	}
 }
