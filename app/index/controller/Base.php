@@ -20,6 +20,9 @@ class Base extends Controller
 		$this->_global['developer'] = config('developer');
 		$this->_global['web_info'] = config('web_info');
 		$this->_global['url'] = $this->getUrl();
+		$this->_global['module'] = $this->getDispatch();
+		
+		$this->_global['oauth_info'] = $this->getOauthInfo();
 		$this->_global['user_info'] = $this->getUserInfo();
 		$this->data['_global'] = $this->_global;
 		// 模板输出位置
@@ -28,9 +31,19 @@ class Base extends Controller
 			'dispatch_success_tmpl' => $this->_tpl . '/public/dispatch_jump',
 			'dispatch_error_tmpl'=> $this->_tpl . '/public/dispatch_jump'
 		]);
+
+		if (!$this->_global['user_info']) {
+			return $this->redirect('login/index');
+		}
 	}
 
-	// 获取登录的用户信息
+	// 获取用户微信信息
+	protected function getOauthInfo()
+	{
+		return ['openid'=>'testopenid','headimg'=>'','nickname'=>'阿敏','sex'=>2];
+	}
+
+	// 获取用户登录信息
 	protected function getUserInfo()
 	{
 		return [];
@@ -61,6 +74,13 @@ class Base extends Controller
 		$url['jump_url'] = request()->server('HTTP_REFERER');
 
 		return $url;
+	}
+
+	// 其他url信息
+	protected function getDispatch()
+	{
+
+		return request()->dispatch()['module'];
 	}
 
 }

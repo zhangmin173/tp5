@@ -10,6 +10,9 @@ class Index extends Base
 	{
 		//dump(request());
 		$this->data['msg'] = 'hello';
+		// dump(cache('name'));
+		// cache('name', 'zhangmin','user_name');
+		// cache('name',NULL);
 		dump($this->data);
 		
 		return $this->fetch($this->_tpl.'index/index',$this->data);
@@ -17,6 +20,8 @@ class Index extends Base
 
 	public function test()
 	{
-		$this->success('成功',$this->_global['url']['jump_url'],['data'=>'123']);
+		dump($this->data);
+		
+		//$this->success('成功',$this->_global['url']['jump_url'],['data'=>'123']);
 	}
 }
