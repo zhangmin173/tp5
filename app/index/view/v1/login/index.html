@@ -4,7 +4,19 @@
 {/block}
 {block name="main"}
 <div class="container">
-	
+	<img class="headimg" src="{$_global.url.public_url}src/logo.png">
+	<form action="register" method="post" class="login-form">
+		<p class="nickname">登录</p>
+		<div class="control label-left">
+			<label><i class="fa fa-user"></i></label>
+			<input class="input" name="name" type="text" placeholder="请输入您的姓名">
+		</div>
+		<div class="control label-left">
+			<label><i class="fa fa-phone"></i></label>
+			<input class="input" name="mobile" type="tel" placeholder="请输入您的手机号">
+		</div>
+		<button class="btn btn-primary btn-block">登录</button>
+	</form>
 </div>
 {/block}
 {block name="js"}

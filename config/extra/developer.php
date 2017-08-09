@@ -1,6 +1,7 @@
 <?php
 
 return [
-	'chinesename'	=>	'张敏',
-	'englishname'	=>	'Jaymz',
+	'chineseName'	=>	'张敏',
+	'englishName'	=>	'Jaymz',
+	'url' => 'baidu.com',
 ];

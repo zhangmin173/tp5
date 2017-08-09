@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<title>{block name="title"}{$_global.web_info.web_title}{/block}</title>
+	<link rel="stylesheet" href="{$_global.url.front_url}css/global.css">
+	<link rel="stylesheet" href="{$_global.url.public_url}lib/font-awesome/4.6.3/font-awesome.css">
+	<script src="{$_global.url.public_url}lib/jquery/1.9.1/jquery.min.js"></script>
+	<script src="{$_global.url.public_url}lib/headroom/0.7.0/headroom.js"></script>
+	<script src="{$_global.url.public_url}lib/template/template.min.js"></script>
+	<script>
+		var _global = <?php echo json_encode($_global); ?>;
+		console.log(_global);
+	</script>
+	<script src="{$_global.url.front_url}js/global.js"></script>
+	<link rel="stylesheet" href="{$_global.url.front_url}lib/m-pop/m-pop.css">
+	<script src="{$_global.url.front_url}lib/m-pop/m-pop.min.js"></script>
+	{block name="css"}{/block}
+</head>
+<body>
+	<!-- 导航 -->
+	<nav id="j-nav" class="nav fixed-top">
+		<a class="nav-left" href=""><i class="fa fa-angle-left"></i></a>
+		<a class="nav-right" href=""><i class="fa fa-ellipsis-h"></i></a>
+		<span class="nav-title">导航标题</span>
+	</nav>
+	<!-- 主体内容 -->
+	{block name="main"}主体内容{/block}
+	<!-- 版权 -->
+	<footer id="j-copy" class="copyright">
+		<a href="{$_global.developer.url}">{$_global.web_info.web_name}·</a>提供技术支持
+	</footer>
+	<!-- 菜单 -->
+	<nav id="j-menu" class="menu fixed-bottom">
+		<a class="active" href="">
+			<i class="fa fa-home"></i>
+			<p>首页</p>
+		</a>
+		<a href="">
+			<i class="fa fa-home"></i>
+			<p>首页</p>
+		</a>
+		<a href="">
+			<img class="menu-special" src="{$_global.url.public_url}src/app.png" alt="">
+		</a>
+		<a href="">
+			<i class="fa fa-home"></i>
+			<p>首页</p>
+		</a>
+		<a href="">
+			<i class="fa fa-home"></i>
+			<p>首页</p>
+		</a>
+	</nav>
+	{block name="js"}{/block}
+</body>
+</html>

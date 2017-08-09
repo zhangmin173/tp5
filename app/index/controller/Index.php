@@ -3,7 +3,7 @@ namespace app\index\controller;
 /**
 * 
 */
-class Index extends Base
+class Index extends Home
 {
 	
 	public function index()

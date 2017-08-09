@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
+use think\Db;
 /**
 * 
 */
@@ -26,15 +27,20 @@ class Base extends Controller
 		$this->_global['user_info'] = $this->getUserInfo();
 		$this->data['_global'] = $this->_global;
 		// 模板输出位置
-		$this->_tpl = '/v1/';
+		$this->_tpl = $this->getV();
 		config([
-			'dispatch_success_tmpl' => $this->_tpl . '/public/dispatch_jump',
-			'dispatch_error_tmpl'=> $this->_tpl . '/public/dispatch_jump'
+			'dispatch_success_tmpl' => $this->_tpl . 'public/dispatch_jump',
+			'dispatch_error_tmpl'=> $this->_tpl . 'public/dispatch_jump'
 		]);
 
-		if (!$this->_global['user_info']) {
-			return $this->redirect('login/index');
-		}
+		$this->base();
+
+	}
+
+	// 基础操作
+	protected function base()
+	{
+		
 	}
 
 	// 获取用户微信信息
@@ -45,6 +51,11 @@ class Base extends Controller
 
 	// 获取用户登录信息
 	protected function getUserInfo()
+	{
+		return Db::name('user')->where(['openid'=>'testopenid'])->find();
+		return [];
+	}
+	protected function setUserInfo($user_info)
 	{
 		return [];
 	}
@@ -70,17 +81,24 @@ class Base extends Controller
 	// 其他url信息
 	protected function getUrl()
 	{
-		$url['domain'] = request()->domain();
+		$url['domain'] = request()->domain().request()->root();
 		$url['jump_url'] = request()->server('HTTP_REFERER');
+		$url['front_url'] = $url['domain'].'/public/'.$this->getDispatch()[0].$this->getV();
+		$url['public_url'] = $url['domain'].'/public/';
 
 		return $url;
 	}
 
-	// 其他url信息
+	// 模块、控制器、方法信息
 	protected function getDispatch()
 	{
 
 		return request()->dispatch()['module'];
+	}
+
+	// 版本信息
+	protected function getV() {
+		return '/v1/';
 	}
 
 }
