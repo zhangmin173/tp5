@@ -19,7 +19,7 @@ return [
     // 默认JSONP处理方法
     'var_jsonp_handler'      => 'callback',
     // 默认全局过滤方法 用逗号分隔多个
-    'default_filter'         => '',
+    'default_filter'         => 'htmlspecialchars',
 
     // +----------------------------------------------------------------------
     // | 模板设置

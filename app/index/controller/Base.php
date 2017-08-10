@@ -57,18 +57,21 @@ class Base extends Controller
 	// 获取用户登录信息
 	protected function getUserInfo()
 	{
-		return Db::name('user')->where(['openid'=>'testopenid'])->find();
-		return [];
+		return session('user_info');
 	}
 	protected function setUserInfo($user_info)
 	{
-		return [];
+		session('user_info',$user_info);
 	}
 
 	// 用户登录之后创建user_token
 	protected function getUserToken()
 	{
 		return '123456';
+	}
+	protected function setUserToken($token)
+	{
+		cookie('token',$token);
 	}
 
 	// 用户登录之后创建app_key

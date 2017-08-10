@@ -13,7 +13,7 @@ class Index extends Home
 		// dump(cache('name'));
 		// cache('name', 'zhangmin','user_name');
 		// cache('name',NULL);
-		dump($this->data);
+		//dump($this->data);
 		
 		return $this->fetch($this->_tpl.'index/index',$this->data);
 	}
