@@ -33,6 +33,11 @@ class Base extends Controller
 			'dispatch_error_tmpl'=> $this->_tpl . 'public/dispatch_jump'
 		]);
 
+		// 是否授权
+		if (is_null($this->_global['oauth_info'])) {
+			return $this->redirect('weixin/index');
+		}
+
 		$this->base();
 
 	}

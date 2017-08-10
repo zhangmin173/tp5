@@ -8,7 +8,7 @@ class Home extends Base
 	// 权限控制
 	protected function base()
 	{
-		//dump($this->data);exit;
+		// 是否登录
 		if (!$this->_global['user_info']) {
 			return $this->redirect('login/index');
 		}
