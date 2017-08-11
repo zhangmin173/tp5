@@ -57,7 +57,22 @@ class Base extends Controller
 	// 获取用户登录信息
 	protected function getUserInfo()
 	{
-		return session('user_info');
+		$oauth_info = $this->getOauthInfo();
+
+		if (session('user_info')) {
+			return session('user_info');
+		} elseif ($oauth_info) {
+			$user_info = Db::name('user')->where(['openid'=>$oauth_info['openid']])->find();
+			if ($user_info) {
+				$this->setUserInfo($user_info);
+				return $user_info;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+		
 	}
 	protected function setUserInfo($user_info)
 	{

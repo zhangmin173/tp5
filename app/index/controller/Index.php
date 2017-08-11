@@ -5,7 +5,14 @@ namespace app\index\controller;
 */
 class Index extends Home
 {
+	protected $db_note;
+
+	protected function before()
+	{
+		$this->db_note = model('note');
 	
+	}
+
 	public function index()
 	{
 		//dump(request());
@@ -18,10 +25,33 @@ class Index extends Home
 		return $this->fetch($this->_tpl.'index/index',$this->data);
 	}
 
-	public function test()
+	public function upload()
 	{
-		dump($this->data);
-		
-		//$this->success('成功',$this->_global['url']['jump_url'],['data'=>'123']);
+		return $this->fetch($this->_tpl.'index/upload',$this->data);
+	}
+
+	public function save()
+	{
+		$d['uid'] = $this->getUserInfo()['id'];
+		$d['title'] = input('title');
+		$d['content'] = input('content');
+		$d['img'] = input('img');
+
+		$res = $this->db_note->allowField(true)->create($d);
+		if ($res) {
+			return $this->success('发布成功',null,$this->data);
+		}
+		return $this->error('发布失败',null,$this->data);
+	}
+
+	public function page()
+	{
+		$limit = input('limit')?input('limit'):10;
+		$offset = input('offset')?input('offset'):0;
+
+		$total = $this->db_note->count();
+		$data = $this->db_note->limit($offset,$limit)->select();
+
+		return json(['ret'=>0,'data'=>$data,'total'=>$total]);
 	}
 }

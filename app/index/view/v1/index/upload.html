@@ -1,0 +1,110 @@
+{extend name="v1/public:layout" /}
+{block name="css"}
+<link rel="stylesheet" href="{$_global.url.public_url}lib/webuploader/webuploader.css">
+<script src="{$_global.url.public_url}lib/webuploader/webuploader.js"></script>
+{/block}
+{block name="main"}
+<div class="container">
+	<form action="{:url('save')}" method="post">
+		<div class="control">
+			<label>标题</label>
+			<input class="input" type="text" name="title">
+		</div>
+		<div class="control">
+			<label>内容</label>
+			<textarea class="textarea" name="content"></textarea>
+		</div>
+		<div class="control">
+			<label>图片</label>
+			<input class="input" name="img" type="text">
+			<div class="upload-box">
+				<ul class="m-upload" id="j-uploadlist">
+
+				</ul>
+				<div class="m-upload-add" id="j-uploadbtn" >
+					+
+				</div>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary btn-block">发布</button>
+	</form>
+</div>
+{/block}
+{block name="js"}
+<script>
+	$(function() {
+	    new Index();
+	});
+	function Index() {
+	    if (!(this instanceof Index)) {
+	        return new Index();
+	    }
+	    this.init();
+	}
+
+	Index.prototype = {
+	    init: function() {
+	        var _this = this;
+
+	        $.h5show({
+	            navShow: false,
+	            menuShow: false,
+	            copyShow: false,
+	        })
+
+	        _this.render();
+	    },
+	    render: function(res) {
+	        var _this = this;
+
+	        _this.uploadInit();
+	        _this.handle();
+	    },
+	    handle: function(res) {
+	        var _this = this;
+
+
+	    },
+	    uploadInit: function() {
+	        var _this = this;
+
+	        // 上传准备
+	        var uploader = WebUploader.create({
+	            auto: true, //开启自动上传
+	            fileVal: 'filedata',
+	            formData: {
+	                access_token:'',
+	                app_key: '',
+	            },
+	            swf: 'Uploader.swf',
+	            server: '{:url("upload/image")}',
+	            pick: '#j-uploadbtn',
+	            // 只允许选择图片文件。
+	            accept: {
+	                title: 'Images',
+	                extensions: 'gif,jpg,jpeg,bmp,png',
+	                mimeTypes: 'image/jpg,image/jpeg,image/png'
+	            },
+	            method:'post',
+	        })
+	        // 开始上传
+	        uploader.on('startUpload', function(file) {
+	            $.loading();
+	        });
+	        // 结束上传
+	        uploader.on('uploadFinished', function(file) {
+	            $.loading();
+	        });                
+	        // 上传成功 
+	        uploader.on('uploadSuccess', function(file, res) {
+	            console.log(res);
+	            $('input[name=img]').val(res.path);
+	        });          
+	        // 上传失败 
+	        uploader.on('uploadError', function(file, res) { 
+	            console.log(res);
+	        });
+	    }
+	};
+</script>
+{/block}

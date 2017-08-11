@@ -67,6 +67,16 @@ gulp.task('watch', function() {
     gulp.watch(root + path.js + '*.js', ['js']);
 });
 
+// 编译lib
+gulp.task('lib', function() {
+    return gulp.src('./public/' + path.lib +  '**/*.less')
+        .pipe(less())
+        .pipe(plumber())
+        .pipe(autoprefix())
+        .pipe(cssmin())
+        .pipe(gulp.dest('./public/' + path.lib));
+});
+
 // 默认执行所有任务
 gulp.task('default',['less','js','lib-less','lib-js'], function() {
 
