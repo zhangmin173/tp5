@@ -48,9 +48,10 @@ class Index extends Home
 	{
 		$limit = input('limit')?input('limit'):10;
 		$offset = input('offset')?input('offset'):0;
+		$map['status'] = input('status');
 
 		$total = $this->db_note->count();
-		$data = $this->db_note->limit($offset,$limit)->select();
+		$data = $this->db_note->where($map)->limit($offset,$limit)->select();
 
 		return json(['ret'=>0,'data'=>$data,'total'=>$total]);
 	}
