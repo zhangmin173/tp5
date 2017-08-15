@@ -92,7 +92,7 @@ $(function(){
 	            var str = $("#test").val();
 	            websocket.send(str);
 	        })
-	    }
+	    },
 	});
 	$.init();
 });
